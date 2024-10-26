@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сайт Сергея</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+
+        #comments-list {
+            margin-top: 20px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+
+        #comments-list div {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <h1>Сайт Сергея</h1>
+        <nav>
+            <ul>
+                <li><a href="#" onclick="showSection('home')">Главная</a></li>
+                <li><a href="#" onclick="showSection('about')">О нас</a></li>
+                <li><a href="#" onclick="showSection('contact')">Контакты</a></li>
+                <li><a href="#" onclick="showSection('comments')">Комментарии</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Основное содержимое -->
+    <main>
+        <div id="home" class="section active">
+            <h2>Добро пожаловать на сайт Сергея!</h2>
+            <p>Это главная страница вашего сайта-визитки.</p>
+        </div>
+
+        <div id="about" class="section">
+            <h2>О нас</h2>
+            <p>Я Овчиников Серегей Евгеньевич.</p>
+            <p>Работаю веб-программистом и так-же умею делать сайты
+                <p>Проживаю в г.Москва Дмитровское ш.,25корп. 1, 127434
+                    
+                </p>
+            </p>
+        </div>
+
+        <div id="contact" class="section">
+            <h2>Контакты</h2>
+            <p>Свяжитесь с Сергеем по телефону: 8 9935743743 или через форму ниже.</p>
+            <form>
+                <input type="text" name="name" placeholder="Ваше имя" required>
+                <input type="email" name="email" placeholder="Ваш email" required>
+                <textarea name="message" placeholder="Ваше сообщение" required></textarea>
+                <button type="submit">Отправить</button>
+            </form>
+        </div>
+
+        <div id="comments" class="section">
+            <h2>Комментарии</h2>
+            <form id="comment-form">
+                <input type="text" id="commenter" placeholder="Ваше имя" required>
+                <textarea id="comment" placeholder="Ваш комментарий" required></textarea>
+                <button type="submit">Оставить комментарий</button>
+            </form>
+            <div id="comments-list"></div>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        <p>Контактная информация: Сергей, телефон: 8 9935743743</p>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            // Скрыть все секции
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+
+            // Показать выбранную секцию
+            const activeSection = document.getElementById(sectionId);
+            activeSection.classList.add('active');
+        }
+
+        // Обработка комментариев
+        document.getElementById('comment-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const commenter = document.getElementById('commenter').value;
+            const comment = document.getElementById('comment').value;
+
+            // Добавление комментария в список
+            const commentsList = document.getElementById('comments-list');
+            const newComment = document.createElement('div');
+            newComment.textContent = `${commenter}: ${comment}`;
+            commentsList.appendChild(newComment);
+
+            // Очистка формы
+            document.getElementById('comment-form').reset();
+        });
+    </script>
+</body>
+</html>
